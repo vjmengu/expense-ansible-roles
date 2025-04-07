@@ -19,7 +19,7 @@
     name: expense
 
 - name: include from another role
-  ansible.builtin.include_role:
+  include_role:
     name: common
     tasks_from: main
 

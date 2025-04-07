@@ -8,9 +8,9 @@
     name: nginx
     state: started
     enabled: yes
-    
+
 - name: use another role
-  ansible.builtin.include_role:
+  include_role:
     name: common
     from_tasks: main
 

@@ -1,2 +1,3 @@
 app_location: /usr/share/nginx/html
 component: frontend
+backend: backend.vijayjohn.online

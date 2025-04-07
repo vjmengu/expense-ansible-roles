@@ -1,4 +1,4 @@
-- name: daemon-reload as backend.service is set up
+- name: restart backend
   ansible.builtin.systemd_service:
     enabled: true
     state: restarted

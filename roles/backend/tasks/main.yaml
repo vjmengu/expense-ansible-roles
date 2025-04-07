@@ -55,6 +55,8 @@
   - cryptography
 
 - name: set the schema from backend to mysql
+  tags:
+  - now
   community.mysql.mysql_db:
     name: all
     state: import

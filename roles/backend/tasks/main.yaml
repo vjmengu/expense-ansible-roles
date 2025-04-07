@@ -62,6 +62,8 @@
     login_password: "{{ mysql_root_password }}"
     login_host: mysql.vijayjohn.online
     target: /app/schema/backend.sql
+  notify:
+  - restart backend
 
 # - name: daemon-reload as backend.service is set up
 #   ansible.builtin.systemd_service:

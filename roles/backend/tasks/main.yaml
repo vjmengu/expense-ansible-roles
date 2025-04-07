@@ -54,15 +54,14 @@
     login_host: mysql.vijayjohn.online
     target: /app/schema/backend.sql
 
-
-
-
 - name: daemon-reload as backend.service is set up
-  ansible.builltin.systemd_service:
+  ansible.builtin.systemd_service:
+    enabled: true
+    state: restarted
     daemon_reload: true
     name: backend
-    state: restarted
-    enabled: true
+    
+    
 
   
 

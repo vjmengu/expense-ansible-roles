@@ -12,7 +12,7 @@
 - name: use another role
   include_role:
     name: common
-    from_tasks: main
+    tasks_from: main
 
 - name: load expense conf
   ansible.builtin.template:

@@ -1,0 +1,22 @@
+- name: install nginx
+  ansible.builtin.package:
+    name: nginx
+    state: present
+
+- name: enable and restart nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: yes
+    
+- name: use another role
+  ansible.builtin.include_role:
+    name: common
+    from_tasks: main
+
+- name: load expense conf
+  ansible.builtin.template:
+    src: expense.conf.j2
+    dest: /etc/nginx/default.d/expense.conf
+  notify:
+  - restart nginx

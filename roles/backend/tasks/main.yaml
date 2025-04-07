@@ -18,25 +18,32 @@
   ansible.builtin.user:
     name: expense
 
-- name: create /app directory
-  ansible.builtin.file:
-    path: /app
-    state: directory
+- name: include from another role
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: main
 
-- name: download and unarchive app
-  ansible.builtin.unarchive:
-    src: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-    dest: /app
-    remote_src: yes
+# - name: create /app directory
+#   ansible.builtin.file:
+#     path: /app
+#     state: directory
+
+# - name: download and unarchive app
+#   ansible.builtin.unarchive:
+#     src: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+#     dest: /app
+#     remote_src: yes
 
 - name: run npm to install dependencies
   community.general.npm:
-    path: /app
+    path: "{{ app_location }}"
 
 - name: copy backend service to the path
-  ansible.builtin.template:
-    src: backend.service.j2
+  ansible.builtin.copy:
+    src: backend.service
     dest: /etc/systemd/system/backend.service
+  notify:
+  - restart backend
     
 
 - name: install python libs
@@ -56,12 +63,12 @@
     login_host: mysql.vijayjohn.online
     target: /app/schema/backend.sql
 
-- name: daemon-reload as backend.service is set up
-  ansible.builtin.systemd_service:
-    enabled: true
-    state: restarted
-    daemon_reload: true
-    name: backend
+# - name: daemon-reload as backend.service is set up
+#   ansible.builtin.systemd_service:
+#     enabled: true
+#     state: restarted
+#     daemon_reload: true
+#     name: backend
     
     
 

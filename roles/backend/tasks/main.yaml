@@ -12,11 +12,7 @@
   - nodejs
   - mysql
 
-- name: start and enable nodejs
-  ansible.builtin.service:
-    name: nodejs
-    state: started
-    enabled: yes
+
   
 - name: create a user for nodejs
   ansible.builtin.user:
